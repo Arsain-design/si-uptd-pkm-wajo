@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UPTD Puskesmas Wajo - Sistem Informasi</title>
+    <link rel="icon" href="icon/logo.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #10b981 0%,
+          #34d399 50%,
+          #6ee7b7 100%
+        );
+      }
+
+      .gradient-card {
+        background: linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%);
+      }
+
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-link {
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #10b981;
+        transform: translateY(-2px);
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.6s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .social-icon {
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        transform: scale(1.1) rotate(5deg);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="gradient-bg shadow-lg sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <div
+              class="bg-gray p-1 rounded-1g mr-2 flex items-center justify-center"
+            >
+              <img
+                src="icon/logo.png"
+                alt="Logo UPTD Puskesmas Wajo"
+                class="w-12 h-12 object-contain"
+                loading="lazy"
+              />
+            </div>
+            <div class="text-white">
+              <h1 class="text-xl font-bold">UPTD Puskesmas Wajo</h1>
+              <p class="text-sm opacity-90">Sistem Informasi</p>
+            </div>
+          </div>
+
+          <div class="hidden md:flex space-x-8">
+            <a
+              href="#beranda"
+              class="nav-link text-white hover:text-green-100 px-3 py-2 text-sm font-medium"
+              >Beranda</a
+            >
+            <a
+              href="#profil"
+              class="nav-link text-white hover:text-green-100 px-3 py-2 text-sm font-medium"
+              >Profil</a
+            >
+            <a
+              href="#spm"
+              class="nav-link text-white hover:text-green-100 px-3 py-2 text-sm font-medium"
+              >SPM</a
+            >
+            <a
+              href="#layanan"
+              class="nav-link text-white hover:text-green-100 px-3 py-2 text-sm font-medium"
+              >Layanan</a
+            >
+            <a
+              href="#alur"
+              class="nav-link text-white hover:text-green-100 px-3 py-2 text-sm font-medium"
+              >Alur</a
+            >
+            <a
+              href="#sop"
+              class="nav-link text-white hover:text-green-100 px-3 py-2 text-sm font-medium"
+              >SOP</a
+            >
+            <a
+              href="https://arsain-design.github.io/si-mas-jo/"
+              class="bg-white text-green-600 px-4 py-2 rounded-lg font-medium hover:bg-green-50 transition-colors"
+            >
+              Login
+            </a>
+          </div>
+
+          <button id="mobile-menu-btn" class="md:hidden text-white">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden hidden bg-green-700 px-4 py-2">
+        <a href="#beranda" class="block text-white py-2">Beranda</a>
+        <a href="#profil" class="block text-white py-2">Profil</a>
+        <a href="#spm" class="block text-white py-2">SPM</a>
+        <a href="#layanan" class="block text-white py-2">Layanan</a>
+        <a href="#alur" class="block text-white py-2">Alur</a>
+        <a href="#sop" class="block text-white py-2">SOP</a>
+        <a
+          href="https://arsain-design.github.io/si-mas-jo/"
+          class="block w-full text-left text-white py-2"
+        >
+          Login
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="gradient-bg py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="fade-in">
+          <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+            Selamat Datang di Sistem Informasi<br />
+            <span class="text-green-100"> UPTD Puskesmas Wajo</span>
+          </h1>
+          <p class="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            Melayani dengan sepenuh hati untuk kesehatan masyarakat yang lebih
+            baik. Akses informasi lengkap tentang layanan kesehatan kami.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#layanan"
+              class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors"
+            >
+              Lihat Layanan
+            </a>
+            <a
+              href="#profil"
+              class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors"
+            >
+              Tentang Kami
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profil Section -->
+    <section id="profil" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">
+            Profil Puskesmas Wajo
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto"
+          ></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-left">
+          <div class="gradient-card p-8 rounded-2xl hover-lift">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Visi & Misi</h3>
+            <div class="space-y-6">
+              <div>
+                <h4 class="text-lg font-semibold text-green-600 mb-2">
+                  VISI :
+                </h4>
+                <p class="text-gray-700">
+                  "Menjadi puskesmas terbaik dan bermutu dalam pelayanan untuk
+                  terwujudnya masyarakat yang berbudaya, sehat, dan mandiri"
+                </p>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-green-600 mb-2">
+                  MISI :
+                </h4>
+                <ul class="text-gray-700 space-y-2">
+                  <li>
+                    • Memberikan pelayanan bermutu, berkeadilan dan terjangkau
+                    oleh masyarakat
+                  </li>
+                  <li>• mendorong kemandirian masyarakat untuk hidup sehat</li>
+                  <li>
+                    • Meningkatkan profesionalisme sumber daya tenaga kesehatan
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-green-600 mb-2">
+                  TATA NILAI :
+                </h4>
+                <ul class="text-gray-700 space-y-2">
+                  <li>• Terampil</li>
+                  <li>• Akuntabel</li>
+                  <li>• Ramah</li>
+                  <li>• Profesional</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-green-600 mb-2">
+                  MOTTO :
+                </h4>
+                <p class="text-gray-700">
+                  "Bolimo Karo Samanamo Lipu" (Mengedepankan Kepentingan Umum
+                  Dari Pada Kepentingan Pribadi)
+                </p>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-green-600 mb-2">
+                  BUDAYA KERJA :
+                </h4>
+                <ul class="text-gray-700 space-y-2">
+                  <li>• Po Maa-maasiaka (Saling Menyayangi)</li>
+                  <li>• Po Binci-binciki Kuli (Simpati dan empati)</li>
+                  <li>• Po Pia-piara (Saling Melindungi)</li>
+                  <li>• Po Ang-angkataka (Saling Menghormati)</li>
+                  <li>• Po Mae-maeka (Saling Menghargai)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="gradient-card p-8 rounded-2xl hover-lift">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">
+              Informasi Umum
+            </h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <svg
+                  class="w-6 h-6 text-green-600 mr-3 mt-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                  />
+                </svg>
+                <div>
+                  <p class="font-semibold text-gray-800">Alamat</p>
+                  <p class="text-gray-600">
+                    Jl. Dr. Wahidin No. 137, Lamangga, Murhum, Baubau, Sulawesi
+                    Tenggara 93725
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <svg
+                  class="w-6 h-6 text-green-600 mr-3 mt-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                  />
+                </svg>
+                <div>
+                  <p class="font-semibold text-gray-800">Telepon</p>
+                  <p class="text-gray-600">(0481) 2822829</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <svg
+                  class="w-6 h-6 text-green-600 mr-3 mt-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
+                </svg>
+                <div>
+                  <p class="font-semibold text-gray-800">Jam Operasional</p>
+                  <p class="text-gray-600">
+                    Senin-Kamis : 08:00 WITA-12:00 WITA<br />jumat: 08:00
+                    WITA-11:00 WITA<br />Sabtu-Minggu : Libur<br />UGD,
+                    Persalinan, dan Perawatan buka 24 jam
+                  </p>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-green-600 mb-2">
+                  WILAYAH KERJA :
+                </h4>
+                <ul class="text-gray-700 space-y-2">
+                  <li>• Kelurahan Lamangga</li>
+                  <li>• Kelurahan Wajo</li>
+                  <li>• Kelurahan Tanganapada</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="spm" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">
+            Jumlah Penduduk Diwilayah Kerja
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto mb-6"
+          ></div>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            Rekapitulasi jumlah penduduk diwilayah kerja UPTD Puskesmas Wajo
+          </p>
+        </div>
+      </div>
+      <!DOCTYPE html>
+      <body
+        class="bg-gradient-to-br from-emerald-50 via-green-50 to-teal-100 min-h-screen p-6"
+      >
+        <div class="max-w-6xl mx-auto">
+          <!-- Tabel -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead
+                  class="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white"
+                >
+                  <tr>
+                    <th class="px-6 py-4 text-left font-semibold">No</th>
+                    <th class="px-6 py-4 text-left font-semibold">Kelurahan</th>
+                    <th class="px-6 py-4 text-center font-semibold">
+                      Laki-laki
+                    </th>
+                    <th class="px-6 py-4 text-center font-semibold">
+                      Perempuan
+                    </th>
+                    <th class="px-6 py-4 text-center font-semibold">
+                      Total Penduduk
+                    </th>
+                    <th class="px-6 py-4 text-center font-semibold">
+                      Jumlah KK
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr
+                    class="hover:bg-emerald-50 transition-colors duration-200"
+                  >
+                    <td class="px-6 py-4 font-medium text-gray-900">1</td>
+                    <td class="px-6 py-4 font-medium text-gray-900">Wajo</td>
+                    <td
+                      class="px-6 py-4 text-center text-emerald-600 font-semibold"
+                    >
+                      3.056
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-teal-600 font-semibold"
+                    >
+                      3.187
+                    </td>
+                    <td class="px-6 py-4 text-center text-gray-800 font-bold">
+                      6.243
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-lime-600 font-semibold"
+                    >
+                      1.208
+                    </td>
+                  </tr>
+                  <tr
+                    class="hover:bg-emerald-50 transition-colors duration-200"
+                  >
+                    <td class="px-6 py-4 font-medium text-gray-900">2</td>
+                    <td class="px-6 py-4 font-medium text-gray-900">
+                      Lamangga
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-emerald-600 font-semibold"
+                    >
+                      3.543
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-teal-600 font-semibold"
+                    >
+                      3.695
+                    </td>
+                    <td class="px-6 py-4 text-center text-gray-800 font-bold">
+                      7.238
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-lime-600 font-semibold"
+                    >
+                      1.186
+                    </td>
+                  </tr>
+                  <tr
+                    class="hover:bg-emerald-50 transition-colors duration-200"
+                  >
+                    <td class="px-6 py-4 font-medium text-gray-900">3</td>
+                    <td class="px-6 py-4 font-medium text-gray-900">
+                      Tanganapada
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-emerald-600 font-semibold"
+                    >
+                      3.140
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-teal-600 font-semibold"
+                    >
+                      3.274
+                    </td>
+                    <td class="px-6 py-4 text-center text-gray-800 font-bold">
+                      6.413
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-lime-600 font-semibold"
+                    >
+                      969
+                    </td>
+                  </tr>
+                  <!-- Total Row -->
+                  <tr
+                    class="bg-gradient-to-r from-emerald-100 via-green-100 to-teal-100 font-bold"
+                  >
+                    <td class="px-6 py-4 text-emerald-800" colspan="2">
+                      TOTAL
+                    </td>
+                    <td class="px-6 py-4 text-center text-emerald-700 text-lg">
+                      9.739
+                    </td>
+                    <td class="px-6 py-4 text-center text-teal-700 text-lg">
+                      10.155
+                    </td>
+                    <td
+                      class="px-6 py-4 text-center text-gray-900 text-lg font-black"
+                    >
+                      19.894
+                    </td>
+                    <td class="px-6 py-4 text-center text-lime-700 text-lg">
+                      3.363
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Summary Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+            <div
+              class="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-emerald-500"
+            >
+              <div class="text-2xl font-bold text-emerald-600 mb-2">9.739</div>
+              <div class="text-gray-600 font-medium">Total Laki-laki</div>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-teal-500"
+            >
+              <div class="text-2xl font-bold text-teal-600 mb-2">10.155</div>
+              <div class="text-gray-600 font-medium">Total Perempuan</div>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-green-500"
+            >
+              <div class="text-2xl font-bold text-green-700 mb-2">19.894</div>
+              <div class="text-gray-600 font-medium">Total Penduduk</div>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-lime-500"
+            >
+              <div class="text-2xl font-bold text-lime-600 mb-2">3.363</div>
+              <div class="text-gray-600 font-medium">Total KK</div>
+            </div>
+          </div>
+
+          <!-- Footer Info -->
+          <div class="text-center mt-8 text-gray-600">
+            <p class="text-sm">
+              Data per tanggal: <span class="font-semibold">Desember 2024</span>
+            </p>
+          </div>
+        </div>
+        <script>
+          (function () {
+            function c() {
+              var b = a.contentDocument || a.contentWindow.document;
+              if (b) {
+                var d = b.createElement("script");
+                d.innerHTML =
+                  "window.__CF$cv$params={r:'9867b78902085e40',t:'MTc1OTEwOTQ0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                b.getElementsByTagName("head")[0].appendChild(d);
+              }
+            }
+            if (document.body) {
+              var a = document.createElement("iframe");
+              a.height = 1;
+              a.width = 1;
+              a.style.position = "absolute";
+              a.style.top = 0;
+              a.style.left = 0;
+              a.style.border = "none";
+              a.style.visibility = "hidden";
+              document.body.appendChild(a);
+              if ("loading" !== document.readyState) c();
+              else if (window.addEventListener)
+                document.addEventListener("DOMContentLoaded", c);
+              else {
+                var e = document.onreadystatechange || function () {};
+                document.onreadystatechange = function (b) {
+                  e(b);
+                  "loading" !== document.readyState &&
+                    ((document.onreadystatechange = e), c());
+                };
+              }
+            }
+          })();
+        </script>
+      </body>
+    </section>
+    <!-- SPM Section -->
+    <section id="spm" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">
+            Standar Pelayanan Minimal (SPM)
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto mb-6"
+          ></div>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            Pencapaian standar pelayanan minimal bidang kesehatan UPTD Puskesmas
+            Wajo
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Ibu Hamil
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              224 orang (61,71%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 363 orang</p>
+          </div>
+
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Ibu Bersalin
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              190 orang (52,78%)%
+            </div>
+            <p class="text-gray-600 text-sm">Target: 360 orang</p>
+          </div>
+
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Bayi Baru Lahir
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              170 orang (46,70%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 364 orang</p>
+          </div>
+
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Balita
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              538 orang (47,92%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 1122 orang</p>
+          </div>
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan usia Pendidikan Dasar
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              0 orang (0%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 5527 orang</p>
+          </div>
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Orang usia Produktif
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              3727 orang (31,19%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 11951 orang</p>
+          </div>
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Usia Lanjut
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              1032 orang (72,12%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 1431 orang</p>
+          </div>
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Penderita Hipertensi
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              956 orang (132,23%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 723 orang</p>
+          </div>
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Penderita DM
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              167 orang (76,61%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 218 orang</p>
+          </div>
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan ODGJ Berat
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              24 orang (100%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 24 orang</p>
+          </div>
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pelayanan Kesehatan Orang Terduga TB
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              280 orang (87,77%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 319 orang</p>
+          </div>
+          <div class="gradient-card p-6 rounded-xl hover-lift text-center">
+            <div
+              class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Pel. Kesehatan Orang Berisiko terinfeksi HIV
+            </h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">
+              536 orang (66,83%)
+            </div>
+            <p class="text-gray-600 text-sm">Target: 802 orang</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layanan Section -->
+    <section id="layanan" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">
+            Jenis Layanan Kesehatan
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto mb-6"
+          ></div>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            Berbagai layanan kesehatan berkualitas untuk memenuhi kebutuhan
+            masyarakat yang berbasis siklus hidup
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="gradient-card p-6 rounded-xl hover-lift">
+            <div
+              class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">
+              Klaster Pelayanan Manajemen
+            </h3>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Manajemen Inti Puskesmas</li>
+              <li>• Manajemen Arsip</li>
+              <li>• Manajemen Sumber Daya Manusia</li>
+              <li>• Manajemen Sapras Dan Perbekalan Kesehatan</li>
+              <li>• Manajemen Mutu Pelayanan</li>
+              <li>• Manajemen Keuangan Dan Aset</li>
+              <li>• Manajemen Sistem Informasi Digital</li>
+              <li>• Manajemen Jejaring</li>
+              <li>• Manajemen Pemberdayaan masyarakat</li>
+            </ul>
+          </div>
+
+          <div class="gradient-card p-6 rounded-xl hover-lift">
+            <div
+              class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">
+              Klaster Pelayanan Kesehatan Ibu Dan Anak
+            </h3>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Pelayanan Kesehatan ibu Hamil, Bersalin atau Nifas</li>
+              <li>• Pelayanan Kesehatan Bayi Dan Anak Balita</li>
+              <li>• Pelayanan Kesehatan Anak Usia Sekolah</li>
+              <li>• Pelayanan Kesehatan Remaja</li>
+            </ul>
+          </div>
+
+          <div class="gradient-card p-6 rounded-xl hover-lift">
+            <div
+              class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">
+              Klaster Pelayanan Kesehatan Dewasa Dan Lanjut Usia
+            </h3>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Pelayanan Kesehatan Dewasa</li>
+              <li>• Pelayanan Kesehatan Lanjut Usia</li>
+            </ul>
+          </div>
+
+          <div class="gradient-card p-6 rounded-xl hover-lift">
+            <div
+              class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">
+              Klaster Pelayanan Penanggulangan Penyakit Menular Dan Kesehatan
+              Lingkungan
+            </h3>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>
+                • Surveilans dan Respons Penyakit Menular, Surveilans
+                Kewaspadaan Dini dan Penanggulangan Kejadian Luar Biasa/Wabah
+              </li>
+              <li>• Surveilans dan Respons Kesehatan Lingkungan</li>
+            </ul>
+          </div>
+
+          <div class="gradient-card p-6 rounded-xl hover-lift">
+            <div
+              class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">
+              Klaster Dukungan Pelayanan Lintas Klaster
+            </h3>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Pelayanan kesehatan Gigi Dan Mulut</li>
+              <li>• Pelayanan Gawat Darurat</li>
+              <li>• Pelayanan Kefarmasian</li>
+              <li>• Pelayanan Laboratorium kesehatan</li>
+              <li>• Pelayanan Rawat Inap</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alur Pelayanan Section -->
+    <section id="alur" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">Alur Pelayanan</h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto mb-6"
+          ></div>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            Panduan langkah demi langkah untuk mendapatkan pelayanan di
+            Puskesmas Wajo
+          </p>
+        </div>
+
+        <div class="relative">
+          <div
+            class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-green-300 hidden md:block"
+          ></div>
+
+          <div class="space-y-12">
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-8 mb-6 md:mb-0">
+                <div class="gradient-card p-6 rounded-xl hover-lift">
+                  <div class="flex items-center mb-4">
+                    <div
+                      class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4"
+                    >
+                      1
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Pendaftaran</h3>
+                  </div>
+                  <p class="text-gray-600">
+                    Daftar di loket pendaftaran dengan membawa Nomor Antrian
+                    serta KTP atau kartu BPJS
+                  </p>
+                </div>
+              </div>
+              <div
+                class="hidden md:block w-6 h-6 bg-green-500 rounded-full border-4 border-white shadow-lg"
+              ></div>
+              <div class="md:w-1/2 md:pl-8"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-8"></div>
+              <div
+                class="hidden md:block w-6 h-6 bg-green-500 rounded-full border-4 border-white shadow-lg"
+              ></div>
+              <div class="md:w-1/2 md:pl-8 mb-6 md:mb-0">
+                <div class="gradient-card p-6 rounded-xl hover-lift">
+                  <div class="flex items-center mb-4">
+                    <div
+                      class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4"
+                    >
+                      2
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Anamnesis</h3>
+                  </div>
+                  <p class="text-gray-600">
+                    Petugas akan mencatat keluhan dan riwayat kesehatan Anda
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-8 mb-6 md:mb-0">
+                <div class="gradient-card p-6 rounded-xl hover-lift">
+                  <div class="flex items-center mb-4">
+                    <div
+                      class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4"
+                    >
+                      3
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Pemeriksaan</h3>
+                  </div>
+                  <p class="text-gray-600">
+                    Dokter atau perawat akan melakukan pemeriksaan sesuai
+                    keluhan
+                  </p>
+                </div>
+              </div>
+              <div
+                class="hidden md:block w-6 h-6 bg-green-500 rounded-full border-4 border-white shadow-lg"
+              ></div>
+              <div class="md:w-1/2 md:pl-8"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-8"></div>
+              <div
+                class="hidden md:block w-6 h-6 bg-green-500 rounded-full border-4 border-white shadow-lg"
+              ></div>
+              <div class="md:w-1/2 md:pl-8 mb-6 md:mb-0">
+                <div class="gradient-card p-6 rounded-xl hover-lift">
+                  <div class="flex items-center mb-4">
+                    <div
+                      class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4"
+                    >
+                      4
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Pengobatan</h3>
+                  </div>
+                  <p class="text-gray-600">
+                    Terima obat di apotek puskesmas sesuai resep dokter
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOP Section -->
+    <section id="sop" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">
+            Standar Operasional Prosedur (SOP)
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto mb-6"
+          ></div>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            Dokumen SOP untuk memastikan kualitas pelayanan yang konsisten
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            class="gradient-card p-6 rounded-xl hover-lift cursor-pointer"
+            onclick="openSOPModal('Pendaftaran Pasien')"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800">
+                SOP Pendaftaran Pasien
+              </h3>
+              <svg
+                class="w-6 h-6 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Prosedur standar untuk pendaftaran pasien baru dan lama
+            </p>
+          </div>
+
+          <div
+            class="gradient-card p-6 rounded-xl hover-lift cursor-pointer"
+            onclick="openSOPModal('Pemeriksaan Umum')"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800">
+                SOP Pemeriksaan Umum
+              </h3>
+              <svg
+                class="w-6 h-6 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Langkah-langkah pemeriksaan kesehatan umum
+            </p>
+          </div>
+
+          <div
+            class="gradient-card p-6 rounded-xl hover-lift cursor-pointer"
+            onclick="openSOPModal('Pelayanan KIA')"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800">SOP Pelayanan KIA</h3>
+              <svg
+                class="w-6 h-6 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Prosedur pelayanan kesehatan ibu dan anak
+            </p>
+          </div>
+
+          <div
+            class="gradient-card p-6 rounded-xl hover-lift cursor-pointer"
+            onclick="openSOPModal('Imunisasi')"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800">SOP Imunisasi</h3>
+              <svg
+                class="w-6 h-6 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Standar prosedur pemberian imunisasi
+            </p>
+          </div>
+
+          <div
+            class="gradient-card p-6 rounded-xl hover-lift cursor-pointer"
+            onclick="openSOPModal('Laboratorium')"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800">SOP Laboratorium</h3>
+              <svg
+                class="w-6 h-6 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Prosedur pemeriksaan laboratorium
+            </p>
+          </div>
+
+          <div
+            class="gradient-card p-6 rounded-xl hover-lift cursor-pointer"
+            onclick="openSOPModal('Keluarga Berencana')"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800">
+                SOP Keluarga Berencana
+              </h3>
+              <svg
+                class="w-6 h-6 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Standar pelayanan keluarga berencana
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Media Sosial Section -->
+    <section class="py-20 gradient-bg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold text-white mb-4">
+          Terhubung dengan Kami
+        </h2>
+        <p class="text-green-100 mb-12 max-w-2xl mx-auto">
+          Ikuti media sosial kami untuk mendapatkan informasi kesehatan
+          terupdate
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-6">
+          <a
+            href="https://wa.me/+6282274709862"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-white p-4 rounded-xl hover-lift group"
+          >
+            <div class="flex items-center space-x-3">
+              <svg
+                class="w-8 h-8 text-green-500 group-hover:text-green-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.085"
+                />
+              </svg>
+              <span class="text-gray-800 font-semibold">WhatsApp</span>
+            </div>
+          </a>
+
+          <a
+            href="https://facebook.com/@uptdpuskesmaswajo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-white p-4 rounded-xl hover-lift group"
+          >
+            <div class="flex items-center space-x-3">
+              <svg
+                class="w-8 h-8 text-blue-600 group-hover:text-blue-700"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                />
+              </svg>
+              <span class="text-gray-800 font-semibold">Facebook</span>
+            </div>
+          </a>
+
+          <a
+            href="https://instagram.com/@uptdpuskesmaswajo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-white p-4 rounded-xl hover-lift group"
+          >
+            <div class="flex items-center space-x-3">
+              <svg
+                class="w-8 h-8 text-pink-600 group-hover:text-pink-700"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323C5.902 8.248 7.053 7.758 8.35 7.758s2.448.49 3.323 1.297c.897.875 1.387 2.026 1.387 3.323s-.49 2.448-1.297 3.323c-.875.897-2.026 1.387-3.323 1.387zm7.718 0c-1.297 0-2.448-.49-3.323-1.297-.897-.875-1.387-2.026-1.387-3.323s.49-2.448 1.297-3.323c.875-.897 2.026-1.387 3.323-1.387s2.448.49 3.323 1.297c.897.875 1.387 2.026 1.387 3.323s-.49 2.448-1.297 3.323c-.875.897-2.026 1.387-3.323 1.387z"
+                />
+              </svg>
+              <span class="text-gray-800 font-semibold">Instagram</span>
+            </div>
+          </a>
+
+          <a
+            href="https://tiktok.com/@uptdpuskesmaswajo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-white p-4 rounded-xl hover-lift group"
+          >
+            <div class="flex items-center space-x-3">
+              <svg
+                class="w-8 h-8 text-gray-800 group-hover:text-gray-900"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
+                />
+              </svg>
+              <span class="text-gray-800 font-semibold">TikTok</span>
+            </div>
+          </a>
+
+          <a
+            href="https://youtube.com/@uptdpuskesmaswajo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-white p-4 rounded-xl hover-lift group"
+          >
+            <div class="flex items-center space-x-3">
+              <svg
+                class="w-8 h-8 text-red-600 group-hover:text-red-700"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                />
+              </svg>
+              <span class="text-gray-800 font-semibold">YouTube</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <div class="bg-green-500 p-2 rounded-lg mr-3">
+                <svg
+                  class="w-6 h-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2L2 7v10c0 5.55 3.84 10 9 11 1.09-.21 2.28-.71 3.33-1.36C16.67 25.29 18.84 24.55 20 23c1.09-1.36 2-3.84 2-9V7l-10-5z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold">UPTD Puskesmas Wajo</h3>
+                <p class="text-gray-400 text-sm">Sistem Informasi</p>
+              </div>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Melayani dengan sepenuh hati untuk kesehatan masyarakat yang lebih
+              baik.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Kontak :</h4>
+            <div class="space-y-2 text-gray-400">
+              <p>
+                📍 Jl. Dr. Wahin No. 137,Lamangga, Murhum, Baubau, Sulawesi
+                Tenggara 93725
+              </p>
+              <p>📞 (0481) 2822829</p>
+              <p>✉️ Puskesmaswajo@gmail.com</p>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Jam Operasional :</h4>
+            <div class="space-y-2 text-gray-400">
+              <p>Senin-Kamis : 08:00 WITA-12:00 WITA</p>
+              <p>Jumat : 08.00 WITA-11.00 WITA</p>
+              <p>Sabtu-Minggu : Tutup</p>
+              <p>UGD, Persalinan, dan perawatan buka 24 jam</p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2025 UPTD Puskesmas Wajo. Semua hak dilindungi.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+        <div class="text-center mb-6">
+          <div
+            class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+              />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800">Login</h3>
+          <p class="text-gray-600">Masukkan Username dan Password</p>
+        </div>
+
+        <form onsubmit="handleLogin(event)">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2"
+              >Username</label
+            >
+            <input
+              type="text"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
+              placeholder="Masukkan username"
+              required
+            />
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
+              placeholder="Masukkan password"
+              required
+            />
+          </div>
+
+          <div class="flex gap-4">
+            <button
+              type="submit"
+              class="flex-1 gradient-bg text-white py-2 px-4 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              onclick="closeLoginModal()"
+              class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg font-semibold hover:bg-gray-400 transition-colors"
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- SOP Modal -->
+    <div id="sopModal" class="modal">
+      <div
+        class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h3 id="sopTitle" class="text-2xl font-bold text-gray-800"></h3>
+          <button
+            onclick="closeSOPModal()"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div id="sopContent" class="text-gray-700 space-y-4"></div>
+      </div>
+    </div>
+
+    <script>
+      // Mobile menu toggle
+      document
+        .getElementById("mobile-menu-btn")
+        .addEventListener("click", function () {
+          const mobileMenu = document.getElementById("mobile-menu");
+          mobileMenu.classList.toggle("hidden");
+        });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+            // Close mobile menu if open
+            document.getElementById("mobile-menu").classList.add("hidden");
+          }
+        });
+      });
+
+      // Login Modal Functions
+      function openLoginModal() {
+        document.getElementById("loginModal").classList.add("active");
+      }
+
+      function closeLoginModal() {
+        document.getElementById("loginModal").classList.remove("active");
+      }
+
+      function handleLogin(event) {
+        event.preventDefault();
+        alert(
+          "Demo: Fitur login akan mengarahkan ke sistem internal puskesmas. Dalam implementasi nyata, ini akan terhubung ke sistem autentikasi yang aman."
+        );
+        closeLoginModal();
+      }
+
+      // SOP Modal Functions
+      function openSOPModal(sopType) {
+        const modal = document.getElementById("sopModal");
+        const title = document.getElementById("sopTitle");
+        const content = document.getElementById("sopContent");
+
+        title.textContent = `SOP ${sopType}`;
+
+        const sopData = {
+          "Pendaftaran Pasien": {
+            steps: [
+              "Pasien datang ke loket pendaftaran",
+              "Petugas mengambil nomor antrian untuk pasien",
+              "Petugas memanggil pasien sesuai nomor antrianr",
+              "Petugas menanyakan apakah pasien sudah pernah berobat ke puskesmas wajo atau belum",
+              "Petugas mencatat kunjungan pasien di buku register pendaftaran",
+              "Petugas mempersilahkan pasien menunggu dipoli tujuan",
+            ],
+          },
+          "Pemeriksaan Umum": {
+            steps: [
+              "Perawat memanggil pasien sesuai nomor antrian",
+              "Anamnesis: menanyakan keluhan utama dan riwayat penyakit",
+              "Pemeriksaan tanda vital (tekanan darah, nadi, suhu, pernapasan)",
+              "Pemeriksaan fisik sesuai keluhan",
+              "Menentukan diagnosis dan rencana pengobatan",
+              "Memberikan resep obat jika diperlukan",
+            ],
+          },
+          "Pelayanan KIA": {
+            steps: [
+              "Registrasi ibu hamil atau anak",
+              "Pemeriksaan kehamilan atau tumbuh kembang anak",
+              "Konseling kesehatan ibu dan anak",
+              "Pemberian suplemen (tablet Fe, vitamin)",
+              "Penjadwalan kunjungan berikutnya",
+              "Pencatatan di buku KIA",
+            ],
+          },
+          Imunisasi: {
+            steps: [
+              "Verifikasi identitas dan jadwal imunisasi",
+              "Pemeriksaan kondisi kesehatan anak",
+              "Persiapan vaksin sesuai jenis dan dosis",
+              "Pemberian imunisasi",
+              "Observasi pasca imunisasi (15-30 menit)",
+              "Pencatatan di kartu imunisasi",
+            ],
+          },
+          Laboratorium: {
+            steps: [
+              "Penerimaan sampel dari pasien",
+              "Verifikasi identitas dan jenis pemeriksaan",
+              "Persiapan alat dan reagen",
+              "Pelaksanaan pemeriksaan laboratorium",
+              "Pencatatan hasil pemeriksaan",
+              "Penyerahan hasil kepada dokter/pasien",
+            ],
+          },
+          "Keluarga Berencana": {
+            steps: [
+              "Konseling awal tentang metode KB",
+              "Pemeriksaan kesehatan calon akseptor",
+              "Pemilihan metode KB yang sesuai",
+              "Pemasangan/pemberian alat kontrasepsi",
+              "Edukasi cara penggunaan dan efek samping",
+              "Penjadwalan kontrol rutin",
+            ],
+          },
+        };
+
+        const data = sopData[sopType];
+        if (data) {
+          content.innerHTML = `
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-lg mb-2">Langkah-langkah:</h4>
+                        <ol class="list-decimal list-inside space-y-2">
+                            ${data.steps
+                              .map((step) => `<li>${step}</li>`)
+                              .join("")}
+                        </ol>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <p class="text-sm text-green-800">
+                            <strong>Catatan:</strong> SOP ini merupakan panduan umum. Untuk detail lengkap dan update terbaru, 
+                            silakan hubungi bagian administrasi puskesmas.
+                        </p>
+                    </div>
+                `;
+        }
+
+        modal.classList.add("active");
+      }
+
+      function closeSOPModal() {
+        document.getElementById("sopModal").classList.remove("active");
+      }
+
+      // Close modals when clicking outside
+      document.addEventListener("click", function (event) {
+        const loginModal = document.getElementById("loginModal");
+        const sopModal = document.getElementById("sopModal");
+
+        if (event.target === loginModal) {
+          closeLoginModal();
+        }
+        if (event.target === sopModal) {
+          closeSOPModal();
+        }
+      });
+
+      // Add fade-in animation to elements when they come into view
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in");
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document.querySelectorAll(".hover-lift").forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'985bd25622871c0e',t:'MTc1ODk4NDcxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
